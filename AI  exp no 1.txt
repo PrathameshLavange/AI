@@ -1,0 +1,64 @@
+# BFS and DFS Implementation using User Input
+
+# Function for BFS
+def bfs(visited, graph, node):
+    visited.append(node)
+    queue = [node]
+
+    while queue:
+        m = queue.pop(0)
+        print(m, end=" ")
+
+        for neighbour in graph[m]:
+            if neighbour not in visited:
+                visited.append(neighbour)
+                queue.append(neighbour)
+
+
+# Function for DFS
+def dfs(visited, graph, node):
+    if node not in visited:
+        print(node, end=" ")
+        visited.add(node)
+        for neighbour in graph[node]:
+            dfs(visited, graph, neighbour)
+
+
+graph = {}  # adjacency list
+
+n = int(input("Enter number of nodes: "))
+e = int(input("Enter number of edges: "))
+
+# Taking node names
+print("\nEnter node names:")
+nodes = []
+for i in range(n):
+    node = input(f"Node {i+1}: ")
+    nodes.append(node)
+    graph[node] = []  # initialize adjacency list
+
+# Taking edges
+print("\nEnter edges (u v):")
+for i in range(e):
+    u, v = input(f"Edge {i+1}: ").split()
+    graph[u].append(v)  # directed graph
+    # For undirected graph, also add the reverse edge:
+    graph[v].append(u)
+
+print("\nGraph Representation (Adjacency List):")
+for node in graph:
+    print(f"{node} : {graph[node]}")
+
+start = input("\nEnter starting node: ")
+
+# BFS
+visited_bfs = []
+print("\nFollowing is the Breadth-First Search:")
+bfs(visited_bfs, graph, start)
+
+# DFS
+visited_dfs = set()
+print("\n\nFollowing is the Depth-First Search:")
+dfs(visited_dfs, graph, start)
+
+1st AI
